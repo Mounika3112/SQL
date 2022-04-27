@@ -1,0 +1,34 @@
+SQL> CREATE TABLE course(course_name varchar(100),course_id number,department varchar(50));
+
+Table created.
+
+SQL> CREATE TABLE student(name varchar(100),id numeric,course varchar(50),semester varchar(50));
+
+Table created.
+
+SQL> CREATE TABLE grade(id numeric,semester varchar(50),course varchar(50),grade varchar(50));
+
+Table created.
+
+SQL> DESC course;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ COURSE_NAME                                        VARCHAR2(100)
+ COURSE_ID                                          NUMBER
+ DEPARTMENT                                         VARCHAR2(50)
+
+SQL> DESC student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(100)
+ ID                                                 NUMBER(38)
+ COURSE                                             VARCHAR2(50)
+ SEMESTER                                           VARCHAR2(50)
+
+SQL> DESC grade
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 NUMBER(38)
+ SEMESTER                                           VARCHAR2(50)
+ COURSE                                             VARCHAR2(50)
+ GRADE                                              VARCHAR2(50)
