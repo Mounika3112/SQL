@@ -1,0 +1,15 @@
+select name,course_id from instructor,teaches where teaches.id=instructor.id and dept_name='Comp. Sci.';
+
+
+NAME                 COURSE_I
+-------------------- --------
+Srinivasan           CS-101
+Srinivasan           CS-315
+Srinivasan           CS-347
+Katz                 CS-101
+Katz                 CS-319
+Brandt               CS-190
+Brandt               CS-190
+Brandt               CS-319
+
+8 rows selected.
