@@ -1,0 +1,8 @@
+ select name,course_id from instructor,teaches where instructor.id=teaches.id and dept_name='Biology';
+ 
+ output:
+ 
+NAME                 COURSE_I
+-------------------- --------
+Crick                BIO-101
+Crick                BIO-301
