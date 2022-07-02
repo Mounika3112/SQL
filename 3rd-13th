@@ -1,0 +1,8 @@
+ select instructor.id from instructor minus select teaches.id from teaches;
+
+output:
+ID
+-----
+33456
+58583
+76543
