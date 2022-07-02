@@ -1,0 +1,74 @@
+ select * from instructor,teaches where instructor.id=teaches.id;
+ 
+ output:
+ ID    NAME                 DEPT_NAME                SALARY ID    COUR
+----- -------------------- -------------------- ---------- ----- ----
+SEC_ID   SEMEST       YEAR
+-------- ------ ----------
+10101 Srinivasan           Comp. Sci.                65000 10101 CS-1
+1        Fall         2009
+
+10101 Srinivasan           Comp. Sci.                65000 10101 CS-3
+1        Spring       2010
+
+10101 Srinivasan           Comp. Sci.                65000 10101 CS-3
+1        Fall         2009
+
+
+ID    NAME                 DEPT_NAME                SALARY ID    COUR
+----- -------------------- -------------------- ---------- ----- ----
+SEC_ID   SEMEST       YEAR
+-------- ------ ----------
+12121 Wu                   Finance                   90000 12121 FIN-
+1        Spring       2010
+
+15151 Mozart               Music                     40000 15151 MU-1
+1        Spring       2010
+
+22222 Einstein             Physics                   95000 22222 PHY-
+1        Fall         2009
+
+
+ID    NAME                 DEPT_NAME                SALARY ID    COUR
+----- -------------------- -------------------- ---------- ----- ----
+SEC_ID   SEMEST       YEAR
+-------- ------ ----------
+32343 El Said              History                   60000 32343 HIS-
+1        Spring       2010
+
+45565 Katz                 Comp. Sci.                75000 45565 CS-1
+1        Spring       2010
+
+45565 Katz                 Comp. Sci.                75000 45565 CS-3
+1        Spring       2010
+
+
+ID    NAME                 DEPT_NAME                SALARY ID    COUR
+----- -------------------- -------------------- ---------- ----- ----
+SEC_ID   SEMEST       YEAR
+-------- ------ ----------
+76766 Crick                Biology                   72000 76766 BIO-
+1        Summer       2009
+
+76766 Crick                Biology                   72000 76766 BIO-
+1        Summer       2010
+
+83821 Brandt               Comp. Sci.                92000 83821 CS-1
+1        Spring       2009
+
+
+ID    NAME                 DEPT_NAME                SALARY ID    COUR
+----- -------------------- -------------------- ---------- ----- ----
+SEC_ID   SEMEST       YEAR
+-------- ------ ----------
+83821 Brandt               Comp. Sci.                92000 83821 CS-1
+2        Spring       2009
+
+83821 Brandt               Comp. Sci.                92000 83821 CS-3
+2        Spring       2010
+
+98345 Kim                  Elec. Eng.                80000 98345 EE-1
+1        Spring       2009
+
+
+15 rows selected.
