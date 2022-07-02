@@ -1,0 +1,14 @@
+select name from instructor where salary>(select min(salary) from instructor where dept_name='Biology');
+
+output:
+NAME
+--------------------
+Wu
+Einstein
+Gold
+Katz
+Singh
+Brandt
+Kim
+
+7 rows selected.
