@@ -1,0 +1,9 @@
+select distinct name from student where dept_name='Comp. Sci.';
+
+output:
+NAME
+--------
+Brown
+Shankar
+Williams
+Zhang
