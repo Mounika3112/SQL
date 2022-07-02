@@ -1,0 +1,8 @@
+select course_id from takes where(semester='Fall' and year=2009)minus(select course_id from takes where semester='Spring' and year=2010);
+
+output:
+
+COURSE_I
+--------
+CS-347
+PHY-101
