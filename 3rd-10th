@@ -1,0 +1,15 @@
+select course_id from takes where(semester='Fall' and year=2009)union(select course_id from takes where semester='Spring' and year=2010);
+
+output:
+COURSE_I
+--------
+CS-101
+CS-315
+CS-319
+CS-347
+FIN-201
+HIS-351
+MU-199
+PHY-101
+
+8 rows selected.
