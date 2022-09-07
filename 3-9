@@ -1,3 +1,5 @@
+9.	Given the table EMPLOYEE (EmpNo, Name, Salary, Designation, DeptID) write a cursor to select the five highest and lowest paid employees from the table.
+
 select * from employee;
 
 EMPNO NAME           SALARY DESIGNATIO     DEPTID
