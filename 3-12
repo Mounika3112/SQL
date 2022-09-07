@@ -1,0 +1,48 @@
+12.	Write a PL/SQL block to check whether the quantity of any product in Inventory table is < 0. If so, using an exception display relevant message and update quantity to 0.
+
+Inventory
+Product_ID	Product_name	Quantity
+
+
+SQL> select * from inventory;
+
+      P_ID P_NAME                      QTY
+---------- -------------------- ----------
+         1 sorter                        9
+         2 screw                         0
+         3 bolt                        -10
+         
+         
+declare
+negative_qty exception;
+id inventory.p_id%type;
+q inventory.qty%type;
+cursor c is
+select p_id,qty from inventory where qty<0;
+begin
+open c;
+loop
+fetch c into id,q;
+exit when c%notfound;
+raise negative_qty;
+end loop;
+exception
+when negative_qty then
+dbms_output.put_line('quantity is negative');
+update inventory set qty=0 where p_id=id;
+end;
+
+SQL> @Z:\SQL\3-12.sql;
+ 19  /
+quantity is negative
+
+PL/SQL procedure successfully completed.
+
+
+SQL>  select * from inventory;
+
+      P_ID P_NAME                      QTY
+---------- -------------------- ----------
+         1 sorter                        9
+         2 screw                         0
+         3 bolt                          0
