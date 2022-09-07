@@ -9,3 +9,49 @@ Product_ID	Status	Date
 Write a PL/SQL block to read the quantity of a product from inventory and if it is > 0 reduce the quantity by 1 and record the status of purchase of that product as ‘PURCHASED’. Otherwise record the status of purchase of that product as ‘OUT OF STOCK’. While recording the status of a purchase, record the date of transaction.
 
 
+SQL> select * from inventory;
+
+      P_ID P_NAME                      QTY
+---------- -------------------- ----------
+         1 sorter                        9
+         2 screw                         0
+         3 bolt                        -10
+         
+SQL> select * from purchase_record;
+
+      P_ID STATUS               P_DATE
+---------- -------------------- ---------
+         3 NOT PURCHASED        17-AUG-22
+         1 PURCHASED            17-AUG-22
+         2 NOT PURCHASED        17-AUG-22
+         1 PURCHASED            07-SEP-22
+
+
+declare 
+id inventory.p_id%type:=&id;
+q inventory.qty%type;
+begin 
+select qty into q from inventory where p_id=id;
+if q>0 then
+update inventory set qty=qty-1 where p_id=id;
+insert into purchase_record values(id,'PURCHASED',sysdate);
+else
+insert into purchase_record values(id,'NOT PURCHASED',sysdate);
+end if;
+end;
+
+SQL> @Z:\SQL\3-6.sql;
+ 13  /
+Enter value for id: 1
+old   2: id inventory.p_id%type:=&id;
+new   2: id inventory.p_id%type:=1;
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from inventory;
+
+      P_ID P_NAME                      QTY
+---------- -------------------- ----------
+         1 sorter                        8
+         2 screw                         0
+         3 bolt                          0
