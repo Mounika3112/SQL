@@ -1,0 +1,35 @@
+3.	Write a PL/SQL block which will accept a number and checks if it is a prime number or not. 
+
+declare
+n number:=&n;
+flag number:=0;
+begin
+for i in 1..n loop
+if mod(n,i)=0 then
+flag:=flag+1;
+end if;
+end loop;
+if flag>2 then
+DBMS_OUTPUT.PUT_LINE('not a prime number');
+else
+DBMS_OUTPUT.PUT_LINE('prime number');
+end if;
+end;
+
+SQL> @Z:\SQL\3-3.sql;
+ 16  /
+Enter value for n: 12
+old   2: n number:=&n;
+new   2: n number:=12;
+not a prime number
+
+PL/SQL procedure successfully completed.
+
+SQL> @Z:\SQL\3-3.sql;
+ 16  /
+Enter value for n: 11
+old   2: n number:=&n;
+new   2: n number:=11;
+prime number
+
+PL/SQL procedure successfully completed.
