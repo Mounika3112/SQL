@@ -1,0 +1,98 @@
+10.	Consider the following relation schemas
+
+Bank_Main
+Acc_no	Name	Address	Acc-type	Curr_balance
+Bank_Trans
+Acc_no	Tr_type	Tr_date	Tr_amt	Upd_flag
+
+Where acc_type is S – savings C- current 
+Tr_type is D – deposit W – withdrawal 
+Write a PL/SQL block to update master table’s (i.e., Bank_Main) curr_balance field with transaction details from transaction file (i.e., Bank_Trans) and also change the status of the Upd_flag field of transaction table to ‘Y’ once the updation is complete.
+...............................................................................................................................
+
+insert into bank_main values(1001,'raju','guntur','s',15000);
+1 row created.
+SQL> insert into bank_main values(1002,'bindhu','vizag','s',10000);
+
+1 row created.
+
+SQL> insert into bank_main values(1003,'abhilash','hyderabad','c',10000);
+
+1 row created.
+
+SQL> insert into bank_main values(1004,'babu','vijayawada','c',9000);
+
+1 row created.
+
+SQL> select * from bank_main;
+
+    ACC_NO NAME       ADDRESS    A CURR_BALANCE
+---------- ---------- ---------- - ------------
+      1001 raju       guntur     s        15000
+      1002 bindhu     vizag      s        10000
+      1003 abhilash   hyderabad  c        10000
+      1004 babu       vijayawada c         9000
+      
+      
+SQL> insert into bank_trans values(1001,'d',sysdate,5000,'n');
+1 row created.
+insert into bank_trans values(1002,'w',sysdate,2000,'y');
+1 row created.
+insert into bank_trans values(1003,'d',sysdate,4000,'y');
+1 row created.
+insert into bank_trans values(1001,'w',sysdate,10000,'n');
+1 row created.
+
+
+SQL> select * from bank_trans;
+
+    ACC_NO T TR_DATE       TR_AMT U
+---------- - --------- ---------- -
+      1001 d 07-SEP-22       5000 n
+      1002 w 07-SEP-22       2000 y
+      1003 d 07-SEP-22       4000 y
+      1001 w 07-SEP-22      10000 n
+
+
+declare
+ac bank_trans.acc_no%type;
+tr_type bank_trans.tr_type%type;
+tr_amt bank_trans.tr_amt%type;
+cursor c is
+select acc_no,tr_type,tr_amt from bank_trans where upd_flag='n';
+begin
+open c;
+loop 
+fetch c into ac,tr_type,tr_amt;
+exit when c%notfound;
+if tr_type='d' then
+update bank_main set curr_balance=curr_balance+tr_amt where acc_no=ac;
+update bank_trans set upd_flag='y' where acc_no=ac;
+else
+update bank_main set curr_balance=curr_balance-tr_amt where acc_no=ac;
+update bank_trans set upd_flag='y' where acc_no=ac;
+end if;
+end loop;
+end;
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from bank_trans;
+
+    ACC_NO T TR_DATE       TR_AMT U
+---------- - --------- ---------- -
+      1001 d 07-SEP-22       5000 y
+      1002 w 07-SEP-22       2000 y
+      1003 d 07-SEP-22       4000 y
+      1001 w 07-SEP-22      10000 y
+
+SQL> select * from bank_main;
+
+    ACC_NO NAME       ADDRESS    A CURR_BALANCE
+---------- ---------- ---------- - ------------
+      1001 raju       guntur     s        10000
+      1002 bindhu     vizag      s        10000
+      1003 abhilash   hyderabad  c        10000
+      1004 babu       vijayawada c         9000
+
+ 
