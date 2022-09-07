@@ -1,0 +1,42 @@
+1.	Write a PL/SQL block to read a number and check whether it is a palindrome or not.
+
+DECLARE 
+n number:=&n;
+l number;
+r number:=n;
+a number:=1;
+n1 number:=0;
+BEGIN
+l:=length(n);
+for i in 1..l-1 loop
+a:=a*10;
+END loop;
+while n>0 loop
+n1:=n1+mod(n,10)*a;
+n:=trunc(n/10);
+a:=a/10;
+END loop;
+if r=n1 then
+DBMS_OUTPUT.PUT_LINE('palindrome');
+else
+DBMS_OUTPUT.PUT_LINE('NOT palindrome');
+END if;
+END;
+
+SQL> @Z:\SQL\3-1.sql;
+ 23  /
+Enter value for n: 121
+old   2: n number:=&n;
+new   2: n number:=121;
+palindrome
+
+PL/SQL procedure successfully completed.
+
+SQL> @Z:\SQL\3-1.sql;
+ 23  /
+Enter value for n: 1234
+old   2: n number:=&n;
+new   2: n number:=1234;
+NOT palindrome
+
+PL/SQL procedure successfully completed.
