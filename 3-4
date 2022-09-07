@@ -1,1 +1,4 @@
+4.	Write a PL/SQL block which will accept two numbers and find out their LCM and HCF. The output should be stored in a table called DEMO_TAB.
+DEMO_TAB
+Number1	Number2	LCM	HCF
 
