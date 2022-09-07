@@ -1,0 +1,61 @@
+select * from employee;
+
+EMPNO NAME           SALARY DESIGNATIO     DEPTID
+----- ---------- ---------- ---------- ----------
+    1 ram             10000 mgr                 1
+    2 sita            90000 mgr                 1
+    3 mouni            8000 mgr                 2
+    4 radha            7000 dvp                 2
+    5 bhanu            6000 dvp                 3
+    6 ramu             5000 dvp                 3
+    7 raju             4000 dvp                 3
+    
+    7 rows selected.
+    
+    
+    
+   declare
+eno employee.empno%type;
+ename employee.name%type;
+esal employee.salary%type;
+des employee.designation%type;
+did employee.deptid%type;
+cursor e_crsr1 is
+select * from(select * from employee order by salary desc) where rownum<=5;
+cursor e_crsr2 is
+select * from(select * from employee order by salary asc) where rownum<=5;
+begin
+open e_crsr1;
+dbms_output.put_line('top5 salaries');
+loop
+fetch e_crsr1 into eno,ename,esal,des,did;
+exit when e_crsr1%notfound;
+dbms_output.put_line(eno||' '||ename||' '||esal||' '||des||' '||did);
+end loop;
+open e_crsr2;
+dbms_output.put_line('least 5 salaries');
+loop
+fetch e_crsr2 into eno,ename,esal,des,did;
+exit when e_crsr2%notfound;
+dbms_output.put_line(eno||' '||ename||' '||esal||' '||des||' '||did);
+end loop;
+end;
+
+
+top5 salaries
+
+2 sita 90000 mgr 1
+1 ram 10000 mgr 1
+3 mouni 8000 mgr 2
+4 radha 7000 dvp 2
+5 bhanu 6000 dvp 3
+
+least 5 salaries
+
+7 raju 4000 dvp 3
+6 ramu 5000 dvp 3
+5 bhanu 6000 dvp 3
+4 radha 7000 dvp 2
+3 mouni 8000 mgr 2
+
+PL/SQL procedure successfully completed.
