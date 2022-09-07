@@ -1,0 +1,40 @@
+7.	Create a table employee with eno, ename, and basic_pay attributes, insert 3 to 4 records and write a PL/SQL block to calculate the Gross salary & Net salary for an employee for the following conditions:
+	HRA is 15% of basic.
+	DA is 62% of basic.
+	PF is 780/- if gross salary exceeds 8000, otherwise 600/-.
+	Professional tax is 2% of basic.
+and then print the employee no, name, hra, da, pf, ptax, gross salary & net salary for that employee.
+
+
+
+declare
+emp_id emp1.eno%type:=&emp_id;
+v emp1.basic_pay%type;
+name emp1.ename%type;
+hra number;
+da number;
+pf number;
+ptax number;
+gross_salary emp1.basic_pay%type;
+net_salary emp1.basic_pay%type;
+begin
+select basic_pay,ename into v,name from emp1 where eno=emp_id;
+hra:=0.15*v;
+da:=0.62*v;
+gross_salary:=v+hra+da;
+if gross_salary>8000 then
+pf:=780;
+else
+pf:=600;
+end if;
+ptax:=0.02*v;
+net_salary:=gross_salary-pf-ptax;
+dbms_output.put_line('emp_id : '||emp_id);
+dbms_output.put_line('name : '||name);
+dbms_output.put_line('hra : '||hra);
+dbms_output.put_line('da : '||da);
+dbms_output.put_line('pf : '||pf);
+dbms_output.put_line('ptax : '||ptax);
+dbms_output.put_line('gross_salary : '||gross_salary);
+dbms_output.put_line('net_salary : '||net_salary);
+end;
