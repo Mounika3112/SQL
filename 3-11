@@ -1,1 +1,26 @@
+11.	Write a PL/SQL block to handle the following built-in exceptions
+no_data_found
+too_many_rows
+zero_divide
 
+
+declare 
+e emp.empno%type;
+nn emp.ename%type;
+n number:=10;
+m number;
+begin
+m:=n/0;
+select ename into nn from emp where deptno=2500;
+select empno into e from emp;
+exception
+when zero_divide then dbms_output.put_line('zero_divide error occured');
+when too_many_rows then dbms_output.put_line('too many rows returned where only 1 is expected');
+when no_data_found then dbms_output.put_line('no data is found');
+end;
+
+SQL> @Z:\SQL\3-11.sql;
+ 15  /
+zero_divide error occured
+
+PL/SQL procedure successfully completed.
