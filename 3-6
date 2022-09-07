@@ -1,0 +1,11 @@
+6.	Consider the following relation schemas
+
+Inventory
+Product_ID	Product_name	Quantity
+
+Purchase_Record
+Product_ID	Status	Date
+
+Write a PL/SQL block to read the quantity of a product from inventory and if it is > 0 reduce the quantity by 1 and record the status of purchase of that product as ‘PURCHASED’. Otherwise record the status of purchase of that product as ‘OUT OF STOCK’. While recording the status of a purchase, record the date of transaction.
+
+
