@@ -1,0 +1,31 @@
+2.	Write a PL/SQL Program to print the first n fibonacci numbers.
+
+declare
+n number:=&n;
+n1 number:=0;
+n2 number:=1;
+n3 number;
+begin
+DBMS_OUTPUT.PUT_LINE(n1);
+DBMS_OUTPUT.PUT_LINE(n2);
+for i in 1..n-2 loop
+n3:=n1+n2;
+DBMS_OUTPUT.PUT_LINE(n3);
+n1:=n2;
+n2:=n3;
+end loop;
+end;
+
+
+SQL> @Z:\SQL\3-2.sql;
+ 16  /
+Enter value for n: 5
+old   2: n number:=&n;
+new   2: n number:=5;
+0
+1
+1
+2
+3
+
+PL/SQL procedure successfully completed.
