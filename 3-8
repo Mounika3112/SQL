@@ -15,7 +15,7 @@ declare
 dept emp2.dno%type:=&dept;
 rows number;
 begin
-delete from emp2@ where dno=dept;
+delete from emp2 where dno=dept;
 if sql%found then
 rows:=sql%rowcount;
 insert into del_history values(dept,rows,sysdate);
