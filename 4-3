@@ -1,0 +1,71 @@
+3.	Write a PL/SQL block that computes increment of an employee in employee table by using incr function which takes employee number as argument, calculates increment and returns the same based on the following criteria:
+	If salary <= 3000 – increment = 30% of salary
+	If salary > 3000 and <= 6000– increment = 20% of salary
+	Else increment = 10% of salary. 
+
+
+select empno,ename,sal from emp;
+     EMPNO ENAME             SAL
+---------- ---------- ----------
+      7839 KING             5000
+      7698 BLAKE            2850
+      7782 CLARK            2450
+      7566 JONES            2975
+      7654 MARTIN           1250
+      7499 ALLEN            1600
+      7844 TURNER           1500
+      7900 JAMES             950
+      7521 WARD             1250
+      7902 FORD             3000
+      7369 SMITH             800
+
+     EMPNO ENAME             SAL
+---------- ---------- ----------
+      7788 SCOTT            3200
+      7876 ADAMS            1100
+      7934 MILLER           1300
+
+14 rows selected.
+
+#function
+
+create or replace function incr(en number) return number
+as n number:=en;
+s number;
+i number;
+begin
+select sal into s from emp where empno=n;
+if s<=3000 then
+i:=0.3*s;
+elsif s>3000 and s<=6000 then
+i:=0.2*s;
+else
+i:=0.1*s;
+end if;
+return i;
+end;
+
+SQL> @Z:\SQL\incr.sql;
+ 16  /
+Function created.
+
+
+declare
+en number:=&employment_number;
+c number;
+begin
+c:=incr(en);
+dbms_output.put_line('Increment = '||c);
+end;
+
+SQL> @Z:\SQL\4-3.sql;
+  8  /
+Enter value for employment_number: 7839
+old   2: en number:=&employment_number;
+new   2: en number:=7839;
+Increment = 1000
+
+PL/SQL procedure successfully completed.
+
+
+
