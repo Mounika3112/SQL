@@ -1,0 +1,53 @@
+2.	Write a PL/SQL function that accepts department number and returns the total salary of the department.
+
+SQL> select empno,deptno,sal from emp;
+
+     EMPNO     DEPTNO        SAL
+---------- ---------- ----------
+      7839         10       5000
+      7698         30       2850
+      7782         10       2450
+      7566         20       2975
+      7654         30       1250
+      7499         30       1600
+      7844         30       1500
+      7900         30        950
+      7521         30       1250
+      7902         20       3000
+      7369         20        800
+
+     EMPNO     DEPTNO        SAL
+---------- ---------- ----------
+      7788         20       3200
+      7876         20       1100
+      7934         10       1300
+
+14 rows selected.
+
+
+create or replace function tot_sal(dn number) return number as n number:=dn;
+s number;
+begin
+select sum(sal) into s from emp where deptno=dn;
+return s;
+end;
+SQL> @Z:\SQL\tot_sal.sql
+  7  /
+
+Function created.
+
+declare 
+dn number:=&n;
+t number;
+begin
+t:=tot_sal(dn);
+dbms_output.put_line('total salar:'||t);
+end;
+SQL> @Z:\SQL\4-2.sql;
+  8  /
+Enter value for n: 20
+old   2: dn number:=&n;
+new   2: dn number:=20;
+total salar:11075
+
+PL/SQL procedure successfully completed.
