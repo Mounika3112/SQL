@@ -1,0 +1,29 @@
+5.	Create a database trigger that checks whether the new salary of employee is less than existing salary. If so, raise an appropriate exception and avoid that updation.
+
+create or replace trigger t1
+before update on emp
+for each row
+begin
+if(:old.sal>:new.sal) then
+raise_application_error(-20000,'salary cant update');
+end if;
+end;
+
+
+SQL> @C:\Users\Praveena\OneDrive\Desktop\m5.sql;
+  9  /
+
+Trigger created.
+
+SQL> update emp set sal=800 where empno=7876;
+update emp set sal=800 where empno=7876
+       *
+ERROR at line 1:
+ORA-20000: salary cant update
+ORA-06512: at "SCOTT.T1", line 3
+ORA-04088: error during execution of trigger 'SCOTT.T1'
+
+
+SQL> update emp set sal=4000 where empno=7900;
+
+1 row updated.
