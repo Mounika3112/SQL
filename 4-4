@@ -1,0 +1,47 @@
+4.	Write a stored procedure that displays the employee names and their total earnings from the Emp Table. Hint: Total earning of an employee = 12*(gross_salary+commission)
+
+create or replace procedure pro as
+cursor c is
+select ename,sal,comm from emp;
+n varchar(20);
+s1 number;
+c1 number;
+total number;
+begin
+open c;
+loop
+fetch c into n,s1,c1;
+exit when c%notfound;
+total :=12*(s1+nvl(c1,0));
+dbms_output.put_line(n||' '||total);
+end loop;
+end;
+
+SQL> @C:\Users\Praveena\OneDrive\Desktop\1.sql;
+ 17  /
+
+Procedure created.
+
+declare
+begin
+pro();
+end;
+
+SQL> @C:\Users\Praveena\OneDrive\Desktop\m11.sql;
+  5  /
+KING 60000
+BLAKE 34200
+CLARK 29400
+JONES 35700
+SCOTT 36000
+FORD 36000
+SMITH 9600
+ALLEN 22800
+WARD 21000
+MARTIN 31800
+TURNER 18000
+ADAMS 13200
+JAMES 9600
+MILLER 15600
+
+PL/SQL procedure successfully completed.
