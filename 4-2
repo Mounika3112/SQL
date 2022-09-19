@@ -25,7 +25,8 @@ SQL> select empno,deptno,sal from emp;
 14 rows selected.
 
 
-create or replace function tot_sal(dn number) return number as n number:=dn;
+create or replace function tot_sal(dn number) return number as 
+n number:=dn;
 s number;
 begin
 select sum(sal) into s from emp where deptno=dn;
