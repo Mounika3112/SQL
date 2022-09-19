@@ -1,0 +1,80 @@
+6.	Consider the following tables
+PERSINFO
+EMPNO	NAME	AGE
+AUDITPERSINFO
+EMPNO	NAME	AGE	OPERATION	ODATE
+
+PERSINFO is the table for which the auditing must be performed and AUDITPERSINFO is the table which keeps track of the records deleted or modified. Create a database trigger audit_trial. This trigger is forced when an UPDATE or a DELETE is performed on the table PERSINFO. It first checks for the operation being performed on the table. Then depending on the operation, a variable (that corresponds to operation) is assigned the value ‘UPDATE’ or ‘DELETE’ and then inserts the updated/deleted record into AUDITPERSINFO.
+
+
+SQL> select * from persinfo;
+
+     EMPNO NAME                        AGE
+---------- -------------------- ----------
+         4 mouni                        19
+         1 narsi                        58
+         2 nag                          43
+         3 sasi                         21
+         
+SQL> select * from auditpersinfo;
+
+     EMPNO NAME                        AGE OPERATION            ODATE
+---------- -------------------- ---------- -------------------- ---------
+         4 pravee                       19 UPDATE               14-SEP-22
+         4 praveena                     19 DELETE               14-SEP-22
+         
+
+
+create or replace trigger tr1
+after update or delete on persinfo
+for each row
+declare
+e number;
+na varchar(20);
+a number;
+begin 
+e:=:old.empno;
+na:=:old.name;
+a:=:old.age;
+if updating then
+insert into auditpersinfo values(e,na,a,'UPDATE',sysdate);
+end if;
+if deleting then
+insert into auditpersinfo values(e,na,a,'DELETE',sysdate);
+end if;
+end;
+
+SQL> @C:\Users\Praveena\OneDrive\Desktop\m6.sql;
+ 19  /
+
+Trigger created.
+
+
+SQL> update persinfo set name='mounika' where name='mouni';
+
+1 row updated.
+
+SQL> delete from persinfo where name='mounika';
+
+1 row deleted.
+
+SQL> select * from persinfo;
+
+     EMPNO NAME                        AGE
+---------- -------------------- ----------
+         1 narsi                        58
+         2 nag                          43
+         3 sasi                         21
+
+SQL> select * from auditpersinfo;
+
+     EMPNO NAME                        AGE OPERATION            ODATE
+---------- -------------------- ---------- -------------------- ---------
+         4 mouni                        19 UPDATE               19-SEP-22
+         4 mouni                        19 UPDATE               19-SEP-22
+         4 mounika                      19 DELETE               19-SEP-22
+         4 mounika                      19 DELETE               19-SEP-22
+         4 pravee                       19 UPDATE               14-SEP-22
+         4 praveena                     19 DELETE               14-SEP-22
+
+6 rows selected.
